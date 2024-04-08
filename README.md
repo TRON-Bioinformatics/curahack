@@ -32,10 +32,11 @@ Please be aware that we are not affilated with the authors, it should just serve
 After generation of fasta files that contain information on the kmer sequences, kmers are subsequently quantified from fastq files using the tool counttags (https://github.com/Transipedia/countTags), which provides kmer abundance as counttable. The count table would represent preprocessed intermeditate files that should be investigate wehther gene level expression can accurately determined.
 
 # Related links
-star repository: https://github.com/alexdobin/STAR
-kallisto repository: https://github.com/pachterlab/kallisto
-ensembl: http://www.ensembl.org/info/genome/genebuild/index.html
-kmerator: https://github.com/Transipedia/kmerator
-counttags: https://github.com/Transipedia/countTags
-original raw data used for generation of test data: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE217893
-gdc data protal: https://portal.gdc.cancer.gov
+
+- star repository: https://github.com/alexdobin/STAR
+- kallisto repository: https://github.com/pachterlab/kallisto
+- ensembl: http://www.ensembl.org/info/genome/genebuild/index.html
+- kmerator: https://github.com/Transipedia/kmerator
+- counttags: https://github.com/Transipedia/countTags
+- original raw data used for generation of test data: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE217893
+- gdc data protal: https://portal.gdc.cancer.gov
