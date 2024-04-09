@@ -467,6 +467,43 @@ GeneTonic::gs_heatmap(vst_v109,
 ```
 
 
+# Back to the matrix
+
+We go back to the counts of the individual samples
+
+- subsetting to the "common genes" (assuming that they go 1:1, let's see...)
+- plotting the same first sample over the two annotations
+- confronting that with the own second biological replicate
+
+```{r backtomat}
+common_gene_ids <- intersect(rownames(dds_v86),
+                             rownames(dds_v109))
+
+dds_v86_common <- dds_v86[common_gene_ids, ]
+dds_v109_common <- dds_v109[common_gene_ids, ]
+
+# and now with a "simple difference"...
+
+hist(counts(dds_v86_common)- counts(dds_v109_common), breaks = 1000)
+
+plot(counts(dds_v86_common[,1], normalized = TRUE),
+     counts(dds_v109_common[,1], normalized = TRUE), 
+     log = "xy")
+
+# cfr with a biological replicate...
+plot(counts(dds_v86_common[,1], normalized = TRUE),
+     counts(dds_v86_common[,2], normalized = TRUE), 
+     log = "xy")
+```
+
+--> hey, there's quite a ONE or TWO puntual differences. Maybe something DID change - or probably, given the simmetry, got exactly swapped?
+
+
+# Possible next steps
+
+- checking some shortlisted candidates?
+- investigating a bit more the functional level
+- going a bit more quantitative on the DE results, instead of purely with a threshold?
 
 
 
