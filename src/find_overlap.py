@@ -1,6 +1,7 @@
+#!/usr/bin/env python
 
+from argparse import ArgumentParser
 import csv
-import sys
 
 
 def overlap_coordinates(genomic_coords, gene_coords):
@@ -54,47 +55,42 @@ def parse_kmer_counts(kmer_counts):
             
                 kmer_coord.append((chrom, pos, pos+31, count))
     return kmer_coord
-        
-
-input_counts = sys.argv[1]
-input_coordinates = "exons_chr1.csv"
-
-genomic_coordinates = parse_kmer_counts(input_counts)
-print("Genomic coordinates parsed.")
-gene_coordinates = parse_exon_coordinates(input_coordinates)
-print("Exonic coordinates parsed.")
 
 
-# Example genomic coordinates
-# genomic_coordinates = [
-#     ('chr1', 1180, 1211),
-#     ('chr1', 1500, 1531),
-#     ('chr2', 3000, 4000)
-# ]
+def main():
+    parser = ArgumentParser(description="Quantifies kmers on exon regions")
+    parser.add_argument("-i", "--input_counts", dest="input_counts", help="Specify input kmer counts")
+    parser.add_argument("-c", "--exon_coord", dest="exon_coord", help="Specify exon coordinates CSV file")
+    parser.add_argument("-o", "--output_csv", dest="output_csv", help="Specify output CSV file")
 
-# Example gene coordinates
-# gene_coordinates = [
-#     ('chr1', 1200, 1800, 'GeneA'),
-#     ('chr2', 3200, 3800, 'GeneB')
-# ]
+    args = parser.parse_args()
 
-# Find overlaps between genomic coordinates and gene coordinates
-overlaps = overlap_coordinates(genomic_coordinates, gene_coordinates)
+    genomic_coordinates = parse_kmer_counts(args.input_counts)
+    print("Genomic coordinates parsed.")
+    gene_coordinates = parse_exon_coordinates(args.exon_coord)
+    print("Exonic coordinates parsed.")
 
-# Process and analyze the overlapping regions
-count_dict = {}
-for overlap in overlaps:
-    
-    genomic_region = overlap[0]
-    gene_region = overlap[1]
-    count = overlap[2]
-    #print(f"Overlap found between genomic region {genomic_region} and gene region {gene_region}: kmer_count={count}")
-    gene_id = gene_region[3]
-    if gene_id in count_dict:
-        count_dict[gene_id] += count
-    else:
-        count_dict[gene_id] = count
 
-with open("results.csv", "w") as outf:
-    for key, val in count_dict.items():
-        outf.write("{};{}\n".format(key, val))
+    # Find overlaps between genomic coordinates and gene coordinates
+    overlaps = overlap_coordinates(genomic_coordinates, gene_coordinates)
+
+    # Process and analyze the overlapping regions
+    count_dict = {}
+    for overlap in overlaps:
+        genomic_region = overlap[0]
+        gene_region = overlap[1]
+        count = overlap[2]
+        #print(f"Overlap found between genomic region {genomic_region} and gene region {gene_region}: kmer_count={count}")
+        gene_id = gene_region[3]
+        if gene_id in count_dict:
+            count_dict[gene_id] += count
+        else:
+            count_dict[gene_id] = count
+
+    with open(args.output_csv, "w") as outf:
+        for key, val in count_dict.items():
+            outf.write("{};{}\n".format(key, val))
+
+
+if __name__ == "__main__":
+    main()

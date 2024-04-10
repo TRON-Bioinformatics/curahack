@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys
+from argparse import ArgumentParser
 
 def get_exon_coordinates(gtf_file):
     count = 0
@@ -37,10 +37,16 @@ def write_to_file(exon_coordinates, output_file):
             outf.write("{};{};{};{}\n".format(chrom, start, end, gene_id))
 
 
+def main():
+    parser = ArgumentParser(description="Generates exonic regions from GTF")
+    parser.add_argument("-i", "--input_gtf", dest="input_gtf", help="Specify input GTF file")
+    parser.add_argument("-o", "--output_csv", dest="output_csv", help="Specify output CSV file")
+
+    args = parser.parse_args()
+
+    exon_coord = get_exon_coordinates(args.input_gtf)
+    write_to_file(exon_coord, args.output_csv)
 
 
-# Example usage:
-input_filename = sys.argv[1]
-output_filename = sys.argv[2]
-exon_coord = get_exon_coordinates(input_filename)
-write_to_file(exon_coord, output_filename)
+if __name__ == "__main__":
+    main()
