@@ -1,5 +1,9 @@
 # download human reference genome GRCh38
 wget https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+gzip -d Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa
+samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa 1 > Homo_sapiens.GRCh38.dna.primary_assembly.chr1.fa
+samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.chr1.fa
 
 
 # download GTF files
