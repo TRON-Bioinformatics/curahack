@@ -1,0 +1,9 @@
+There are 5 shared gene ids with modified coordinates in both GTFs
+{'ENSG00000117724', 'ENSG00000143552', 'ENSG00000198400', 'ENSG00000241128', 'ENSG00000157216'}
+There are 0 unique gene ids in GTF 1
+set()
+There are 0 unique gene ids in GTF 2
+set()
+There are 5654 common genes with equal gene coordinates in both GTFs
+There are 5645 common genes with identical coordinates across all exons in both GTFs
+Jaccard index: 0.9950643398554556

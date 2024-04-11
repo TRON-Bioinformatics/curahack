@@ -1,0 +1,9 @@
+There are 0 shared gene ids with modified coordinates in both GTFs
+set()
+There are 0 unique gene ids in GTF 1
+set()
+There are 0 unique gene ids in GTF 2
+set()
+There are 5594 common genes with equal gene coordinates in both GTFs
+There are 5594 common genes with identical coordinates across all exons in both GTFs
+Jaccard index: 1.0

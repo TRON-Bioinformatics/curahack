@@ -1,0 +1,2 @@
+gtfparse==2.5.0
+pandas==2.2.1
