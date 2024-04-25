@@ -1,0 +1,9 @@
+.nextflow/
+.nextflow.*
+dag*
+report*
+timeline*
+trace*
+conda_env/
+test_output/
+work/
